@@ -147,6 +147,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Pipe (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 8362123978891543141, guid: c5b62d913a84d514db3aa4271f1eed5f, type: 3}
+      propertyPath: m_Size.y
+      value: 4.643465
+      objectReference: {fileID: 0}
+    - target: {fileID: 8362123978891543141, guid: c5b62d913a84d514db3aa4271f1eed5f, type: 3}
+      propertyPath: m_Offset.y
+      value: -2.0282674
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
