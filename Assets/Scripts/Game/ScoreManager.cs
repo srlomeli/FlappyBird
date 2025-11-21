@@ -1,14 +1,12 @@
 using TMPro;
 using UnityEngine;
 
-public class ScoreHandler : MonoBehaviour
+public class ScoreManager : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI scoreTxt;
     [SerializeField] private TextMeshProUGUI scoreInfoTxt;
     [SerializeField] private TextMeshProUGUI highscoreInfoTxt;
 
-    [SerializeField] private Animator newHighscoreAnimator;
-    [SerializeField] private Animator addScoreAnimator;
 
     private int curScore;
     private bool gameOver;
@@ -17,16 +15,16 @@ public class ScoreHandler : MonoBehaviour
 
     private void OnEnable()
     {
-        BirdController.OnGameOver += OnGameOver;
+        PlaneController.OnGameOver += OnGameOver;
     }
     private void OnDisable()
     {
-        BirdController.OnGameOver -= OnGameOver;
+        PlaneController.OnGameOver -= OnGameOver;
     }
 
     private void Update()
     {
-        if (gameOver || !GameController.hasStarted) return;
+        if (gameOver || !GameManager.hasStarted) return;
 
         foreach (var pipe in WorldGenerator.pipes)
         {
@@ -52,7 +50,6 @@ public class ScoreHandler : MonoBehaviour
         int highScore = prefsHighScore > curScore ? prefsHighScore : curScore;
         SaveManager.Save("Highscore", highScore);
 
-        newHighscoreAnimator.SetBool("NewHighscore", highScore != prefsHighScore);
 
         highscoreInfoTxt.text = $"Highscore {highScore}";
         scoreInfoTxt.text = $"Score {curScore}";
@@ -63,6 +60,5 @@ public class ScoreHandler : MonoBehaviour
         AudioManager.instance.pointAudioSource.Play();
         curScore++;
         scoreTxt.text = curScore.ToString();
-        addScoreAnimator.SetTrigger("AddScore");
     }
 }

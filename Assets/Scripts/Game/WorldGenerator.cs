@@ -65,15 +65,15 @@ public class WorldGenerator : MonoBehaviour
 
     private void OnEnable()
     {
-        GameController.OnGameStart += OnStart;
+        GameManager.OnGameStart += OnStart;
     }
 
     private void OnDisable()
     {
-        GameController.OnGameStart -= OnStart;
+        GameManager.OnGameStart -= OnStart;
     }
 
-    public void OnRetry()
+    public void OnRestart()
     {
         int pipesCount = pipes.Count, bgsCount = bgs.Count, floorTilesCount = floorTiles.Count;
         for (int i = 0; i < pipesCount; i++)
@@ -91,7 +91,7 @@ public class WorldGenerator : MonoBehaviour
 
     private void Update()
     {
-        if (GameController.hasStarted)
+        if (GameManager.hasStarted)
         {
             UpdatePipes();
         }

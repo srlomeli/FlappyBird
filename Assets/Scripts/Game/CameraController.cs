@@ -11,11 +11,11 @@ public class CameraController : MonoBehaviour
 
     private void OnEnable()
     {
-        BirdController.OnGameOver += OnGameOver;
+        PlaneController.OnGameOver += OnGameOver;
     }
     private void OnDisable()
     {
-        BirdController.OnGameOver -= OnGameOver;
+        PlaneController.OnGameOver -= OnGameOver;
     }
     private void OnGameOver()
     {

@@ -1,32 +1,33 @@
 using System;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class GameController : MonoBehaviour
+public class GameManager : MonoBehaviour
 {
     public static bool hasStarted;
-    [SerializeField] private GameObject startScreen;
-    [SerializeField] private GameObject gameoverScreen;
-    [SerializeField] private GameObject mainUI;
+    [SerializeField] private GameObject startPannel;
+    [SerializeField] private GameObject gameoverPannel;
+    [SerializeField] private GameObject InGamePannel;
 
     public static Action OnGameStart;
-    public static Action OnRetry;
+    public static Action OnRestart;
 
     private void OnEnable()
     {
-        BirdController.OnGameOver += OnDeath;
+        PlaneController.OnGameOver += OnDeath;
     }
 
     private void OnDisable()
     {
-        BirdController.OnGameOver -= OnDeath;
+        PlaneController.OnGameOver -= OnDeath;
     }
 
     private void Awake()
     {
         hasStarted = false;
         LoadSceneManager.Check();
-        startScreen.SetActive(true);
+        startPannel.SetActive(true);
     }
 
     private void Update()
@@ -40,37 +41,28 @@ public class GameController : MonoBehaviour
 
             hasStarted = true;
             OnGameStart?.Invoke();
-            startScreen.SetActive(false);
-            mainUI.SetActive(true);
+            startPannel.SetActive(false);
+            InGamePannel.SetActive(true);
         }
     }
 
     public void OnDeath()
     {
-        gameoverScreen.SetActive(true);
+        gameoverPannel.SetActive(true);
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
     }
 
-    public void OnClickRetry()
+    public void OnClickRestart()
     {
-        Retry();
+        Restart();
     }
 
-    private async void Retry()
+    private async void Restart()
     {
         await SceneManager.UnloadSceneAsync(LoadSceneManager.GAME_SCENE);
         hasStarted = false;
         await SceneManager.LoadSceneAsync(LoadSceneManager.GAME_SCENE, LoadSceneMode.Additive);
-        WorldGenerator.instance.OnRetry();
-    }
-
-    public void QuitApplication()
-    {
-        Application.Quit();
-    }
-    public void OnClickMenu()
-    {
-        LoadSceneManager.LoadMenuScene_FromGame();
+        WorldGenerator.instance.OnRestart();
     }
 }

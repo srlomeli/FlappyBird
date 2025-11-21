@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-public class BirdController : MonoBehaviour
+public class PlaneController : MonoBehaviour
 {
     private Rigidbody2D rb2D;
 
@@ -9,11 +9,10 @@ public class BirdController : MonoBehaviour
     [SerializeField] private float movementSpeed = 5f;
     [SerializeField] private float jumpForce = 8f;
     [SerializeField] private float maxVeloctiyRoation = 75;
-    [SerializeField] private float rotationMultiplier = 2;
+    [SerializeField] private float rotationMultiplier = 0;
     [SerializeField] private float maxVeloctiyY = 10;
 
     [SerializeField] private float deathForce = 2;
-    [SerializeField] private Animator birdAnimator;
 
     private bool isDead;
     private bool isOnFloor;
@@ -22,12 +21,12 @@ public class BirdController : MonoBehaviour
 
     private void OnEnable()
     {
-        GameController.OnGameStart += OnStart;
+        GameManager.OnGameStart += OnStart;
     }
 
     private void OnDisable()
     {
-        GameController.OnGameStart -= OnStart;
+        GameManager.OnGameStart -= OnStart;
     }
 
     void Start()
@@ -48,7 +47,6 @@ public class BirdController : MonoBehaviour
             if(jumpKeyPressed)
             AudioManager.instance.jumpAudioSource.Play();
 
-            birdAnimator.SetBool("Floor", isOnFloor);
         }
 
         transform.eulerAngles = new Vector3(0, 0, Mathf.Clamp(rb2D.linearVelocityY, -maxVeloctiyRoation, maxVeloctiyRoation) * rotationMultiplier);
@@ -84,8 +82,6 @@ public class BirdController : MonoBehaviour
     {
         isDead = true;
         OnGameOver?.Invoke();
-        birdAnimator.SetBool("Floor", false);
-        birdAnimator.SetBool("Dead", true);
         AudioManager.instance.deathSource.Play();
     }
 
