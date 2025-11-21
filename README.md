@@ -1,17 +1,6 @@
-# 🐦 Flappy Bird (Unity Clone)
+# Flappy Plane
+A simple Flappy Bird-style game where you control a plane navigating through obstacles. 
 
-A small **Flappy Bird clone**, built in about **2 hours** using **Unity 6.0**.  
-Download the game here: [▶️ Itch.io](https://rainixx.itch.io/flappy-bird)
-
----
-
-## Screenshots
-<p align="center">
-  <img src="Docs/Screenshot1.png" width="45%" alt="Gameplay Screenshot 1">
-  <img src="Docs/Screenshot5.png" width="45%" alt="Gameplay Screenshot 2">
-  <img src="Docs/Screenshot7.png" width="45%" alt="Gameplay Screenshot 3">
-  <img src="Docs/Screenshot8.png" width="45%" alt="Gameplay Screenshot 4">
-</p>
 
 ---
 
